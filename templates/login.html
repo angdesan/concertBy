@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/main.css" rel="stylesheet"/>
+    <title>ConcertBy</title>
+</head>
+<body>
+    <div class="register-form-container">
+        {% for message in messages %}
+            <div>{{message}}</div>
+        {% endfor %}
+        <h1>Iniciar sesión</h1>
+        <form method="POST" class="register-form">
+            {% csrf_token %}
+            {{login_form}}
+            <br/>
+            <button type="submit" class="submit-button">
+                Iniciar sesion
+            </button>
+        </form>
+        <p>No tienes cuenta, <a href="/registro"> Registrate</a>.</p>
+    </div>
+</body>
+</html>

@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import Concierto, Artista, Persona, Pago, Ticket
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from .forms import RegistroForm
+from .forms import RegistroForm, LoginForm
 # Create your views here.
 
 class MainView(TemplateView):
@@ -36,3 +36,21 @@ def registro_request(request):
     return render(request=request,
                   template_name='registro.html',
                   context={'registro_form': form})
+
+def login_request(request):
+    if request.method == 'POST' :
+        form = LoginForm(request,data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username,password=password)
+            if user is not None:
+                login(request,user)
+                messages.info(request, f'Ha iniciado sesión como: {username}')
+                return redirect('landing')
+            messages.error(request, 'Credenciales incorrectas')
+        messages.error(request, 'Credenciales incorrectas')
+    form = LoginForm()
+    return render(request=request,
+                    template_name='login.html',
+                    context={'login_form': form})

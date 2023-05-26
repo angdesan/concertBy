@@ -22,6 +22,7 @@ urlpatterns = [
     path("", views.MainView.as_view(), name='landing'),
     path('admin/', admin.site.urls),
     path("registro", views.registro_request, name='registro'),
+    path("login", views.login_request, name='login'),
     path("getInfoConciertoById/<int:id_concierto>",views.getInfoConciertoById,name="getInfoConciertoById"),
     path('conciertos/',views.getListadoConcert, name='getListadoConcert')
 ]

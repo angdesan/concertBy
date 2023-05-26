@@ -1,5 +1,6 @@
+from typing import Any
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from ConcertBy.models import Persona
 class RegistroForm(UserCreationForm):
@@ -28,5 +29,8 @@ class RegistroForm(UserCreationForm):
             new_persona.save()
         return user
 
-
-
+class LoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(LoginForm,self).__init__( *args, **kwargs)
+        for key in self.fields.keys():
+            self.fields[key].widget.attrs['class'] = 'general'
