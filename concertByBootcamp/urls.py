@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("registro", views.registro_request, name='registro'),
     path("login", views.login_request, name='login'),
+    path("logout", views.logout_request, name='logout'),
     path("getInfoConciertoById/<int:id_concierto>",views.getInfoConciertoById,name="getInfoConciertoById"),
     path('conciertos/',views.getListadoConcert, name='getListadoConcert')
 ]

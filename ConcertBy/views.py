@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import Concierto, Artista, Persona, Pago, Ticket
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import RegistroForm, LoginForm
 # Create your views here.
@@ -54,3 +54,8 @@ def login_request(request):
     return render(request=request,
                     template_name='login.html',
                     context={'login_form': form})
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, "Has cerrado sesión")
+    return redirect('login')
