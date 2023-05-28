@@ -25,5 +25,6 @@ urlpatterns = [
     path("login", views.login_request, name='login'),
     path("logout", views.logout_request, name='logout'),
     path("getInfoConciertoById/<int:id_concierto>",views.getInfoConciertoById,name="getInfoConciertoById"),
-    path('conciertos/',views.getListadoConcert, name='getListadoConcert')
+    path('conciertos/',views.getListadoConcert, name='getListadoConcert'),
+    path('gestionar_pago',views.gestionar_pago, name='gestionar_pago')
 ]

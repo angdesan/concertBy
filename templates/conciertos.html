@@ -38,6 +38,9 @@
     <section class="contact-section bg-black">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5">
+                <h2 class="text-white mb-2">Conciertos disponibles</h2>
+                <br>
+                <br>
                 {% for id_concierto, nombre_concierto, url_img_concierto in conciertos %}
                 <div class="col-md-4 mb-3 mb-md-0">
                     <a href="/getInfoConciertoById/{{id_concierto}}">
