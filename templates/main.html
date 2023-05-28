@@ -31,11 +31,12 @@
                     <h1 class="mx-auto my-0 text-uppercase">ConcertBy tickets</h1>
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">¡Vive la música en vivo! Consigue tus entradas y 
                         disfruta de los mejores conciertos. ¡No te quedes fuera, compra ahora</h2>
-                    <a class="btn btn-primary" href="conciertos">Ver conciertos</a>
+                    <a class="btn btn-primary" href="{% if user.is_authenticated %}conciertos{% else %}login{% endif %}">Ver conciertos</a>
                 </div>
             </div>
         </div>
     </header>
     {% include 'footer.html' %}
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

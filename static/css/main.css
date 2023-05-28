@@ -2863,7 +2863,10 @@ textarea.form-control-lg {
   --bs-btn-disabled-bg: #64a19d;
   --bs-btn-disabled-border-color: #64a19d;
 }
-
+#btn-login {
+  background-color: #64a19d;
+    border-color: #64a19d;
+}
 .btn-secondary {
   --bs-btn-color: #fff;
   --bs-btn-bg: #7464a1;

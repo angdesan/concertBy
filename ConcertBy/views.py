@@ -24,7 +24,8 @@ def getInfoConciertoById(request, id_concierto):
 def registro_request(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)
-        if form.is_valid():
+        validar = form.is_valid()
+        if validar:
             user = form.save()
             login(request, user)
             messages.success(request, 'Se ha registrado exitosamente')
@@ -35,7 +36,7 @@ def registro_request(request):
         form = RegistroForm()
     return render(request=request,
                   template_name='registro.html',
-                  context={'registro_form': form})
+                  context={'registro_form': form,'messages': messages.get_messages(request)})
 
 def login_request(request):
     if request.method == 'POST' :
@@ -51,6 +52,7 @@ def login_request(request):
             messages.error(request, 'Credenciales incorrectas')
         messages.error(request, 'Credenciales incorrectas')
     form = LoginForm()
+    print(form)
     return render(request=request,
                     template_name='login.html',
                     context={'login_form': form})
