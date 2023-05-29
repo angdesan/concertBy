@@ -11,6 +11,8 @@ from django.utils import timezone
 class MainView(TemplateView):
     template_name = "main.html"
 
+def listadoTickets(request):
+    return render(request,'ver_tickets.html')
 def getListadoConcert(request):
     conciertos = Concierto.objects.all()
     nombre_conciertos = []
