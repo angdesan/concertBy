@@ -15,6 +15,7 @@ class Concierto(models.Model):
     fecha_concierto = models.DateTimeField(default=timezone.now)
     cantidad_boletos = models.IntegerField(default=0)
     precio = models.FloatField(default=0)
+    ubicacion = models.CharField(max_length=2083, default="Estadio Modelo")
     url_img_concierto = models.CharField(max_length=2083, default="valor predeterminado")
     artista = models.ForeignKey('Artista',on_delete=models.PROTECT, related_name='artista')
 

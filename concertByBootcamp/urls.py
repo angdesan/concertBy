@@ -27,5 +27,6 @@ urlpatterns = [
     path("getInfoConciertoById/<int:id_concierto>",views.getInfoConciertoById,name="getInfoConciertoById"),
     path('conciertos/',views.getListadoConcert, name='getListadoConcert'),
     path('gestionar_pago',views.gestionar_pago, name='gestionar_pago'),
-    path('listadoTickets',views.listadoTickets,name='listadoTickets')
+    path('listadoTickets',views.listadoTickets,name='listadoTickets'),
+    path("getInfoTicketById",views.getInfoTicketById,name="getInfoTicketById")
 ]

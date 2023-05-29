@@ -57,7 +57,6 @@ h1 {
 
 .date:before,
 .date:after {
-    content: "";
     display: block;
     width: 30px;
     height: 30px;
@@ -113,6 +112,7 @@ h1 {
 }
 
 
+
 .card-cont>div {
     display: table-row
 }
@@ -137,7 +137,7 @@ h1 {
     display: block
 }
 
-.card-cont a {
+.card-cont .button-tickets {
     display: block;
     text-decoration: none;
     width: 80px;

@@ -26,13 +26,14 @@
             <div class="row gx-4 gx-lg-5">
                 <div class="col-md-10 col-lg-6 mx-auto text-center">
                     <h2 class="text-white mb-2">{{nombre_concierto}}</h2>
-                    <img src="{{url_img_concierto}}" alt="{{nombre_concierto}}" width="400" height="350">
+                    <img src="{{url_img_concierto}}" alt="{{nombre_concierto}}" width="400" height="390">
                 </div>
                 <div class="col-md-10 col-lg-6 mx-auto ">
                     <div class="product-details">
                         <h2 class="product-title">{{artista.nombre_artista}}</h2>
                         <p class="product-info"><strong>Fecha:</strong> {{ fecha_concierto|date:'d' }} de {{ fecha_concierto|date:'F' }}, {{ fecha_concierto|date:'Y' }}</p>
                         <p class="product-info"><strong>Hora:</strong> {{ fecha_concierto|time:'H:i:s' }}</p>
+                        <p class="product-info"><strong>Lugar:</strong> {{ubicacion}}</p>
                         <p class="product-price" id="precio">$ {{precio_entradas}}</p>
                         <p class="product-info"><strong>Boletos disponibles:</strong> {{cantidad_disponible}}</p>
                         

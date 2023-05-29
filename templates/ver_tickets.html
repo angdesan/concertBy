@@ -26,61 +26,79 @@
     </section> -->
     <section class="signup-section" id="signup">
         <div class="container">
-            <h1>Events</h1>
+            <h1>Tickets adquiridos</h1>
             <div class="row">
-                <article class="card fl-left">
-                    <section class="date">
-                        <time datetime="23th feb">
-                            <span>23</span><span>feb</span>
-                        </time>
-                    </section>
-                    <section class="card-cont">
-                        <small>dj khaled</small>
-                        <h3>live in sydney</h3>
-                        <div class="even-date">
-                            <i class="fa fa-calendar"></i>
-                            <time>
-                                <span>wednesday 28 december 2014</span>
-                                <span>08:55pm to 12:00 am</span>
+                {% for id, concierto__nombre, concierto__fecha_concierto, concierto__ubicacion,concierto__artista__nombre in tickets %}
+                    <article class="card fl-left">
+                        <section class="date">
+                            <time datetime="{{concierto__fecha_concierto |date:'d M'}}">
+                                <span>{{concierto__fecha_concierto |date:'d'}}</span><span>{{concierto__fecha_concierto |date:'b'}}</span>
                             </time>
+                        </section>
+                        <section class="card-cont">
+                            <small>{{concierto__artista__nombre}}</small>
+                            <h3>{{concierto__nombre}}</h3>
+                            <div class="even-date">
+                                
+                                <time>
+                                    <span> {{ concierto__fecha_concierto|date:"l d F Y" }}</span>
+                                    <span> {{ concierto__fecha_concierto|time:"h:iA" }} to 12:00 am</span>
+                                </time>
+                            </div>
+                            <div class="even-info">
+                                
+                                <p>
+                                    {{concierto__ubicacion}}
+                                </p>
+                            </div>
+                            <button  class="button-tickets" id="button-{{id}}" onclick="cancelar(this.id)" style="background-color: red !important;">cancelar</button>
+                        </section>
+                    </article>
+                    {% if forloop.counter|divisibleby:2 and not forloop.last %}
                         </div>
-                        <div class="even-info">
-                            <i class="fa fa-map-marker"></i>
-                            <p>
-                            nexen square for people australia, sydney
-                            </p>
-                        </div>
-                        <a href="#">tickets</a>
-                  </section>
-                </article>
-                <article class="card fl-left">
-                    <section class="date">
-                        <time datetime="23th feb">
-                            <span>23</span><span>feb</span>
-                        </time>
-                    </section>
-                    <section class="card-cont">
-                        <small>dj khaled</small>
-                        <h3>corner obsest program</h3>
-                        <div class="even-date">
-                            <i class="fa fa-calendar"></i>
-                            <time>
-                               <span>wednesday 28 december 2014</span>
-                               <span>08:55pm to 12:00 am</span>
-                            </time>
-                        </div>
-                        <div class="even-info">
-                            <i class="fa fa-map-marker"></i>
-                            <p>
-                                nexen square for people australia, sydney
-                            </p>
-                        </div>
-                        <a href="#">tickets</a>
-                  </section>
-                </article>
+                        <div class="row">
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </section>
-
+    {% include 'footer.html' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        function cancelar(path){
+            var ruta = path.split('-');
+            var url = "http://localhost:8000/getInfoTicketById";
+            $.ajax({
+                url: url,
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                data: {
+                    id_ticket: path[path.length-1]
+                },
+                success: function(response) {
+                    if(response.error){
+                        toastr.warning(response.error)
+                        setTimeout(function(){
+                            window.location.href = 'http://localhost:8000/';
+                        },2000);
+                    }else{
+                        toastr.success(response.message)
+                        setTimeout(function(){
+                            window.location.href = 'http://localhost:8000/listadoTickets';
+                        },2000)
+                    }
+                },
+                error: function(xhr, errmsg, err) {
+                    toastr.err(errmsg);
+                    // Manejar los errores de la solicitud AJAX
+                }
+            });
+        }
+    </script>
 </body>
 </html>
